@@ -15,8 +15,8 @@
 import pynini
 from pynini.lib import pynutil
 
-from nemo_text_processing.text_normalization.hi.graph_utils import MINUS, NEMO_NOT_QUOTE, GraphFst, insert_space
-from nemo_text_processing.text_normalization.hi.taggers.decimal import quantities
+from nemo_text_processing.text_normalization.ka.graph_utils import MINUS, NEMO_NOT_QUOTE, GraphFst, insert_space
+from nemo_text_processing.text_normalization.ka.taggers.decimal import quantities
 
 
 class DecimalFst(GraphFst):
@@ -37,7 +37,7 @@ class DecimalFst(GraphFst):
             pynutil.delete("fractional_part: \"") + pynini.closure(NEMO_NOT_QUOTE, 1) + pynutil.delete("\"")
         )
 
-        self.fractional = pynutil.insert(" दशमलव ") + self.fractional_default
+        self.fractional = pynutil.insert(" ದಶಮಾಂಶ ") + self.fractional_default
 
         self.quantity = (
             delete_space + insert_space + pynutil.delete("quantity: \"") + quantities + pynutil.delete("\"")

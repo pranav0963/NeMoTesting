@@ -15,7 +15,7 @@
 import pynini
 from pynini.lib import pynutil
 
-from nemo_text_processing.text_normalization.hi.graph_utils import MINUS, NEMO_NOT_QUOTE, GraphFst, insert_space
+from nemo_text_processing.text_normalization.ka.graph_utils import MINUS, NEMO_NOT_QUOTE, GraphFst, insert_space
 
 
 class FractionFst(GraphFst):
@@ -38,7 +38,7 @@ class FractionFst(GraphFst):
         integer = pynutil.delete("integer_part: \"") + pynini.closure(NEMO_NOT_QUOTE) + pynutil.delete("\" ")
         numerator = pynutil.delete("numerator: \"") + pynini.closure(NEMO_NOT_QUOTE) + pynutil.delete("\" ")
         denominator = pynutil.delete("denominator: \"") + pynini.closure(NEMO_NOT_QUOTE) + pynutil.delete("\"")
-        insert_bata = pynutil.insert(" बटा ")
+        insert_bata = pynutil.insert(" ವಿಂಗಡಿಸಲಾಗಿದೆ ")
 
         fraction_default = numerator + insert_bata + denominator
 

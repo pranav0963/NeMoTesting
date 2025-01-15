@@ -15,13 +15,13 @@
 import pynini
 from pynini.lib import pynutil
 
-from nemo_text_processing.text_normalization.hi.graph_utils import (
+from nemo_text_processing.text_normalization.ka.graph_utils import (
     MIN_NEG_WEIGHT,
     NEMO_NOT_SPACE,
     GraphFst,
     convert_space,
 )
-from nemo_text_processing.text_normalization.hi.taggers.punctuation import PunctuationFst
+from nemo_text_processing.text_normalization.ka.taggers.punctuation import PunctuationFst
 
 
 class WordFst(GraphFst):
@@ -39,7 +39,7 @@ class WordFst(GraphFst):
         super().__init__(name="word", kind="classify", deterministic=deterministic)
 
         # Define Hindi characters and symbols using pynini.union
-        HINDI_CHAR = pynini.union(
+        KAN_CHAR = pynini.union(
             *[chr(i) for i in range(ord("ऀ"), ord("ः") + 1)],  # Hindi vowels and consonants
             *[chr(i) for i in range(ord("अ"), ord("ह") + 1)],  # More Hindi characters
             *[chr(i) for i in range(ord("ा"), ord("्") + 1)],  # Hindi diacritics
@@ -51,8 +51,8 @@ class WordFst(GraphFst):
         default_graph = pynini.closure(pynini.difference(NEMO_NOT_SPACE, punct.project("input")), 1)
         symbols_to_exclude = (pynini.union("$", "€", "₩", "£", "¥", "#", "%") | punct).optimize()
 
-        # Use HINDI_CHAR in the graph
-        graph = pynini.closure(pynini.difference(HINDI_CHAR, symbols_to_exclude), 1)
+        # Use KAN_CHAR in the graph
+        graph = pynini.closure(pynini.difference(KAN_CHAR, symbols_to_exclude), 1)
         graph = pynutil.add_weight(graph, MIN_NEG_WEIGHT) | default_graph
 
         # Ensure no spaces around punctuation

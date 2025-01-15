@@ -15,8 +15,8 @@
 import pynini
 from pynini.lib import pynutil
 
-from nemo_text_processing.text_normalization.hi.graph_utils import GraphFst, insert_space
-from nemo_text_processing.text_normalization.hi.utils import get_abs_path
+from nemo_text_processing.text_normalization.ka.graph_utils import GraphFst, insert_space
+from nemo_text_processing.text_normalization.ka.utils import get_abs_path
 
 hours_graph = pynini.string_file(get_abs_path("data/time/hours.tsv"))
 minutes_graph = pynini.string_file(get_abs_path("data/time/minutes.tsv"))
@@ -54,7 +54,7 @@ class TimeFst(GraphFst):
         graph_hm = self.hours + delete_colon + insert_space + self.minutes
 
         # hour
-        graph_h = self.hours + delete_colon + pynutil.delete("००")
+        graph_h = self.hours + delete_colon + pynutil.delete("೦೦")
 
         final_graph = graph_hms | graph_hm | graph_h
 

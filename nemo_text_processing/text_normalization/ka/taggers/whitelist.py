@@ -15,13 +15,13 @@
 import pynini
 from pynini.lib import pynutil
 
-from nemo_text_processing.text_normalization.hi.graph_utils import (
+from nemo_text_processing.text_normalization.ka.graph_utils import (
     INPUT_LOWER_CASED,
     NEMO_UPPER,
     GraphFst,
     convert_space,
 )
-from nemo_text_processing.text_normalization.hi.utils import (
+from nemo_text_processing.text_normalization.ka.utils import (
     augment_labels_with_punct_at_end,
     get_abs_path,
     load_labels,

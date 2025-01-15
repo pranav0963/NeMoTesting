@@ -15,7 +15,7 @@
 import pynini
 from pynini.lib import pynutil
 
-from nemo_text_processing.text_normalization.hi.graph_utils import NEMO_NOT_QUOTE, GraphFst, delete_space, insert_space
+from nemo_text_processing.text_normalization.ka.graph_utils import NEMO_NOT_QUOTE, GraphFst, delete_space, insert_space
 
 
 class TimeFst(GraphFst):
@@ -43,10 +43,10 @@ class TimeFst(GraphFst):
             pynutil.delete("seconds: \"") + pynini.closure(NEMO_NOT_QUOTE, 1) + pynutil.delete("\"") + insert_space
         )
 
-        insert_minute = pynutil.insert("मिनट")
-        insert_second = pynutil.insert("सेकंड")
-        insert_bajkar = pynutil.insert("बजकर")
-        insert_baje = pynutil.insert("बजे")
+        insert_minute = pynutil.insert("ನಿಮಿಷಗಳು")
+        insert_second = pynutil.insert("ಸೆಕೆಂಡುಗಳು")
+        insert_bajkar = pynutil.insert("ಗಂಟೆಯ ಹೊತ್ತಿಗೆ")
+        insert_baje = pynutil.insert("ಗಂಟೆಗೆ")
 
         # hour minute second
         graph_hms = (
