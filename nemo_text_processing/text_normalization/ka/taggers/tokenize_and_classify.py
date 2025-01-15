@@ -19,23 +19,23 @@ import time
 import pynini
 from pynini.lib import pynutil
 
-from nemo_text_processing.text_normalization.hi.graph_utils import (
+from nemo_text_processing.text_normalization.ka.graph_utils import (
     NEMO_WHITE_SPACE,
     GraphFst,
     delete_extra_space,
     delete_space,
     generator_main,
 )
-from nemo_text_processing.text_normalization.hi.taggers.cardinal import CardinalFst
-from nemo_text_processing.text_normalization.hi.taggers.date import DateFst
-from nemo_text_processing.text_normalization.hi.taggers.decimal import DecimalFst
-from nemo_text_processing.text_normalization.hi.taggers.fraction import FractionFst
-from nemo_text_processing.text_normalization.hi.taggers.measure import MeasureFst
-from nemo_text_processing.text_normalization.hi.taggers.money import MoneyFst
-from nemo_text_processing.text_normalization.hi.taggers.punctuation import PunctuationFst
-from nemo_text_processing.text_normalization.hi.taggers.time import TimeFst
-from nemo_text_processing.text_normalization.hi.taggers.whitelist import WhiteListFst
-from nemo_text_processing.text_normalization.hi.taggers.word import WordFst
+from nemo_text_processing.text_normalization.ka.taggers.cardinal import CardinalFst
+from nemo_text_processing.text_normalization.ka.taggers.date import DateFst
+from nemo_text_processing.text_normalization.ka.taggers.decimal import DecimalFst
+from nemo_text_processing.text_normalization.ka.taggers.fraction import FractionFst
+from nemo_text_processing.text_normalization.ka.taggers.measure import MeasureFst
+from nemo_text_processing.text_normalization.ka.taggers.money import MoneyFst
+from nemo_text_processing.text_normalization.ka.taggers.punctuation import PunctuationFst
+from nemo_text_processing.text_normalization.ka.taggers.time import TimeFst
+from nemo_text_processing.text_normalization.ka.taggers.whitelist import WhiteListFst
+from nemo_text_processing.text_normalization.ka.taggers.word import WordFst
 
 
 class ClassifyFst(GraphFst):
@@ -68,7 +68,7 @@ class ClassifyFst(GraphFst):
             os.makedirs(cache_dir, exist_ok=True)
             whitelist_file = os.path.basename(whitelist) if whitelist else ""
             far_file = os.path.join(
-                cache_dir, f"hi_tn_{deterministic}_deterministic_{input_case}_{whitelist_file}_tokenize.far"
+                cache_dir, f"ka_tn_{deterministic}_deterministic_{input_case}_{whitelist_file}_tokenize.far"
             )
         if not overwrite_cache and far_file and os.path.exists(far_file):
             self.fst = pynini.Far(far_file, mode="r")["tokenize_and_classify"]
