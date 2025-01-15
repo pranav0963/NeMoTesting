@@ -15,8 +15,8 @@
 import pynini
 from pynini.lib import pynutil
 
-from nemo_text_processing.text_normalization.hi.graph_utils import GraphFst
-from nemo_text_processing.text_normalization.hi.utils import get_abs_path
+from nemo_text_processing.text_normalization.ka.graph_utils import GraphFst
+from nemo_text_processing.text_normalization.ka.utils import get_abs_path
 
 
 class CardinalFst(GraphFst):
@@ -38,7 +38,7 @@ class CardinalFst(GraphFst):
         teens_and_ties = pynutil.add_weight(teens_ties, -0.1)
 
         def create_graph_suffix(digit_graph, suffix, zeros_counts):
-            zero = pynutil.add_weight(pynutil.delete("०"), -0.1)
+            zero = pynutil.add_weight(pynutil.delete("೦"), -0.1)
             if zeros_counts == 0:
                 return digit_graph + suffix
 
@@ -46,14 +46,14 @@ class CardinalFst(GraphFst):
 
         def create_larger_number_graph(digit_graph, suffix, zeros_counts, sub_graph):
             insert_space = pynutil.insert(" ")
-            zero = pynutil.add_weight(pynutil.delete("०"), -0.1)
+            zero = pynutil.add_weight(pynutil.delete("೦"), -0.1)
             if zeros_counts == 0:
                 return digit_graph + suffix + insert_space + sub_graph
 
             return digit_graph + suffix + (zero ** zeros_counts) + insert_space + sub_graph
 
         # Hundred graph
-        suffix_hundreds = pynutil.insert(" सौ")
+        suffix_hundreds = pynutil.insert(" ನೂರು")
         graph_hundreds = create_graph_suffix(digit, suffix_hundreds, 2)
         graph_hundreds |= create_larger_number_graph(digit, suffix_hundreds, 1, digit)
         graph_hundreds |= create_larger_number_graph(digit, suffix_hundreds, 0, teens_ties)
@@ -67,7 +67,7 @@ class CardinalFst(GraphFst):
         self.graph_hundreds_as_thousand = graph_hundreds_as_thousand
 
         # Thousands and Ten thousands graph
-        suffix_thousands = pynutil.insert(" हज़ार")
+        suffix_thousands = pynutil.insert(" ಹಜಾರ")
         graph_thousands = create_graph_suffix(digit, suffix_thousands, 3)
         graph_thousands |= create_larger_number_graph(digit, suffix_thousands, 2, digit)
         graph_thousands |= create_larger_number_graph(digit, suffix_thousands, 1, teens_ties)
@@ -82,7 +82,7 @@ class CardinalFst(GraphFst):
         graph_ten_thousands.optimize()
 
         # Lakhs graph and ten lakhs graph
-        suffix_lakhs = pynutil.insert(" लाख")
+        suffix_lakhs = pynutil.insert(" ಲಕ್ಷ")
         graph_lakhs = create_graph_suffix(digit, suffix_lakhs, 5)
         graph_lakhs |= create_larger_number_graph(digit, suffix_lakhs, 4, digit)
         graph_lakhs |= create_larger_number_graph(digit, suffix_lakhs, 3, teens_ties)
@@ -100,7 +100,7 @@ class CardinalFst(GraphFst):
         graph_ten_lakhs.optimize()
 
         # Crores graph ten crores graph
-        suffix_crores = pynutil.insert(" करोड़")
+        suffix_crores = pynutil.insert(" ಕೋಟಿ")
         graph_crores = create_graph_suffix(digit, suffix_crores, 7)
         graph_crores |= create_larger_number_graph(digit, suffix_crores, 6, digit)
         graph_crores |= create_larger_number_graph(digit, suffix_crores, 5, teens_ties)
@@ -122,7 +122,7 @@ class CardinalFst(GraphFst):
         graph_ten_crores.optimize()
 
         # Arabs graph and ten arabs graph
-        suffix_arabs = pynutil.insert(" अरब")
+        suffix_arabs = pynutil.insert(" ಅರವೋ")
         graph_arabs = create_graph_suffix(digit, suffix_arabs, 9)
         graph_arabs |= create_larger_number_graph(digit, suffix_arabs, 8, digit)
         graph_arabs |= create_larger_number_graph(digit, suffix_arabs, 7, teens_ties)
@@ -148,7 +148,7 @@ class CardinalFst(GraphFst):
         graph_ten_arabs.optimize()
 
         # Kharabs graph and ten kharabs graph
-        suffix_kharabs = pynutil.insert(" खरब")
+        suffix_kharabs = pynutil.insert(" ಖರಬ")
         graph_kharabs = create_graph_suffix(digit, suffix_kharabs, 11)
         graph_kharabs |= create_larger_number_graph(digit, suffix_kharabs, 10, digit)
         graph_kharabs |= create_larger_number_graph(digit, suffix_kharabs, 9, teens_ties)
@@ -178,7 +178,7 @@ class CardinalFst(GraphFst):
         graph_ten_kharabs.optimize()
 
         # Nils graph and ten nils graph
-        suffix_nils = pynutil.insert(" नील")
+        suffix_nils = pynutil.insert(" ನೀಲ್")
         graph_nils = create_graph_suffix(digit, suffix_nils, 13)
         graph_nils |= create_larger_number_graph(digit, suffix_nils, 12, digit)
         graph_nils |= create_larger_number_graph(digit, suffix_nils, 11, teens_ties)
@@ -212,7 +212,7 @@ class CardinalFst(GraphFst):
         graph_ten_nils.optimize()
 
         # Padmas graph and ten padmas graph
-        suffix_padmas = pynutil.insert(" पद्म")
+        suffix_padmas = pynutil.insert(" ಪದ್ಮ")
         graph_padmas = create_graph_suffix(digit, suffix_padmas, 15)
         graph_padmas |= create_larger_number_graph(digit, suffix_padmas, 14, digit)
         graph_padmas |= create_larger_number_graph(digit, suffix_padmas, 13, teens_ties)
@@ -250,7 +250,7 @@ class CardinalFst(GraphFst):
         graph_ten_padmas.optimize()
 
         # Shankhs graph and ten shankhs graph
-        suffix_shankhs = pynutil.insert(" शंख")
+        suffix_shankhs = pynutil.insert(" ಪದ್ಮ")
         graph_shankhs = create_graph_suffix(digit, suffix_shankhs, 17)
         graph_shankhs |= create_larger_number_graph(digit, suffix_shankhs, 16, digit)
         graph_shankhs |= create_larger_number_graph(digit, suffix_shankhs, 15, teens_ties)

@@ -15,14 +15,14 @@
 import pynini
 from pynini.lib import pynutil
 
-from nemo_text_processing.text_normalization.hi.graph_utils import (
-    NEMO_HI_DIGIT,
-    NEMO_HI_NON_ZERO,
-    NEMO_HI_ZERO,
+from nemo_text_processing.text_normalization.ka.graph_utils import (
+    NEMO_KA_DIGIT,
+    NEMO_KA_NON_ZERO,
+    NEMO_KA_ZERO,
     GraphFst,
     insert_space,
 )
-from nemo_text_processing.text_normalization.hi.utils import get_abs_path
+from nemo_text_processing.text_normalization.ka.utils import get_abs_path
 
 days = pynini.string_file(get_abs_path("data/date/days.tsv"))
 months = pynini.string_file(get_abs_path("data/date/months.tsv"))
@@ -45,10 +45,10 @@ class DateFst(GraphFst):
         super().__init__(name="date", kind="classify")
 
         graph_year_thousands = pynini.compose(
-            (NEMO_HI_DIGIT + NEMO_HI_ZERO + NEMO_HI_DIGIT + NEMO_HI_DIGIT), cardinal.graph_thousands
+            (NEMO_KA_DIGIT + NEMO_KA_ZERO + NEMO_KA_DIGIT + NEMO_KA_DIGIT), cardinal.graph_thousands
         )
         graph_year_hundreds_as_thousands = pynini.compose(
-            (NEMO_HI_DIGIT + NEMO_HI_NON_ZERO + NEMO_HI_DIGIT + NEMO_HI_DIGIT), cardinal.graph_hundreds_as_thousand
+            (NEMO_KA_DIGIT + NEMO_KA_NON_ZERO + NEMO_KA_DIGIT + NEMO_KA_DIGIT), cardinal.graph_hundreds_as_thousand
         )
 
         graph_year = graph_year_thousands | graph_year_hundreds_as_thousands
