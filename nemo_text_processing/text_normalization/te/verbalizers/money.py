@@ -34,7 +34,7 @@ class MoneyFst(GraphFst):
     def __init__(self, cardinal: GraphFst, decimal: GraphFst):
         super().__init__(name="money", kind="verbalize")
 
-        insert_paise = pynutil.insert("డబ్బు")
+        insert_paise = pynutil.insert("పైసలు")
 
         currency = (
             pynutil.delete('currency: "') + pynini.closure(NEMO_NOT_QUOTE, 1) + pynutil.delete('" ') + insert_space
