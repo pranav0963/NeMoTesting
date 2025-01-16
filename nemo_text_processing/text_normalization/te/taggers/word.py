@@ -15,13 +15,13 @@
 import pynini
 from pynini.lib import pynutil
 
-from nemo_text_processing.text_normalization.ka.graph_utils import (
+from nemo_text_processing.text_normalization.te.graph_utils import (
     MIN_NEG_WEIGHT,
     NEMO_NOT_SPACE,
     GraphFst,
     convert_space,
 )
-from nemo_text_processing.text_normalization.ka.taggers.punctuation import PunctuationFst
+from nemo_text_processing.text_normalization.te.taggers.punctuation import PunctuationFst
 
 
 class WordFst(GraphFst):
@@ -39,11 +39,11 @@ class WordFst(GraphFst):
         super().__init__(name="word", kind="classify", deterministic=deterministic)
 
         # Define Hindi characters and symbols using pynini.union
-        KAN_CHAR = pynini.union( 
-            *[chr(i) for i in range(ord("ಀ"), ord("ಃ") + 1)],  # Kannada vowels and consonants
-            *[chr(i) for i in range(ord("ಅ"), ord("ಹ") + 1)],  # More Kannada characters
-            *[chr(i) for i in range(ord("ಾ"), ord("್") + 1)],  # Kannada diacritics
-            *[chr(i) for i in range(ord("೦"), ord("೯") + 1)],  # Kannada digits
+        TEL_CHAR = pynini.union( 
+            *[chr(i) for i in range(ord("ఀ"), ord("ః") + 1)],  # Telugu vowels and consonants
+            *[chr(i) for i in range(ord("అ"), ord("హ") + 1)],  # More Telugu characters
+            *[chr(i) for i in range(ord("ా"), ord("్") + 1)],  # Telugu diacritics
+            *[chr(i) for i in range(ord("౦"), ord("౯") + 1)],  # Telugu digits
         ).optimize()
 
         # Include punctuation in the graph
@@ -51,8 +51,8 @@ class WordFst(GraphFst):
         default_graph = pynini.closure(pynini.difference(NEMO_NOT_SPACE, punct.project("input")), 1)
         symbols_to_exclude = (pynini.union("$", "€", "₩", "£", "¥", "#", "%") | punct).optimize()
 
-        # Use KAN_CHAR in the graph
-        graph = pynini.closure(pynini.difference(KAN_CHAR, symbols_to_exclude), 1)
+        # Use TEL_CHAR in the graph
+        graph = pynini.closure(pynini.difference(TEL_CHAR, symbols_to_exclude), 1)
         graph = pynutil.add_weight(graph, MIN_NEG_WEIGHT) | default_graph
 
         # Ensure no spaces around punctuation

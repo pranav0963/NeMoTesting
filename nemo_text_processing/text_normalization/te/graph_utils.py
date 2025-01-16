@@ -27,9 +27,9 @@ from pynini.lib import byte, pynutil, utf8
 NEMO_CHAR = utf8.VALID_UTF8_CHAR
 NEMO_DIGIT = byte.DIGIT
 
-NEMO_KA_DIGIT = pynini.union("೦", "೧", "೨", "೩", "೪", "೫", "೬", "೭", "೮", "೯").optimize()
-NEMO_KA_NON_ZERO = pynini.union("೧", "೨", "೩", "೪", "೫", "೬", "೭", "೮", "೯").optimize()
-NEMO_KA_ZERO = "೦"
+NEMO_TE_DIGIT = pynini.union("౦", "೧", "೨", "೩", "೪", "೫", "೬", "೭", "೮", "೯").optimize()
+NEMO_TE_NON_ZERO = pynini.union("೧", "೨", "೩", "೪", "೫", "೬", "೭", "೮", "೯").optimize()
+NEMO_TE_ZERO = "೦"
 NEMO_LOWER = pynini.union(*string.ascii_lowercase).optimize()
 NEMO_UPPER = pynini.union(*string.ascii_uppercase).optimize()
 NEMO_ALPHA = pynini.union(NEMO_LOWER, NEMO_UPPER).optimize()
@@ -58,7 +58,7 @@ MIN_NEG_WEIGHT = -0.0001
 MIN_POS_WEIGHT = 0.0001
 INPUT_CASED = "cased"
 INPUT_LOWER_CASED = "lower_cased"
-MINUS = pynini.union(" ಋಣಾತ್ಮಕ ", " ಋಣಾತ್ಮಕ ").optimize()
+MINUS = pynini.union(" ప్రతికూలమైనది ", " ప్రతికూలమైనది ").optimize()
 
 
 def capitalized_input_graph(
