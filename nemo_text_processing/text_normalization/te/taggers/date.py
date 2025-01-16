@@ -22,7 +22,7 @@ from nemo_text_processing.text_normalization.te.graph_utils import (
     GraphFst,
     insert_space,
 )
-from nemo_text_processing.text_normalization.TE.utils import get_abs_path
+from nemo_text_processing.text_normalization.te.utils import get_abs_path
 
 days = pynini.string_file(get_abs_path("data/date/days.tsv"))
 months = pynini.string_file(get_abs_path("data/date/months.tsv"))
